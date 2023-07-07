@@ -1,7 +1,6 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
-
 const Body = () => {
     const [restList,setRestList] = useState([]);
     useEffect(()=> {
@@ -11,14 +10,10 @@ const Body = () => {
             setRestList(jsonData?.data?.cards[2]?.data?.data?.cards);
         }
         fetchData();
-    }
-        ,[]);
-
-
-    if(restList.length === 0){
-        return <Shimmer/>
-    }
-        
+    } ,[]);
+    // if(restList.length === 0){
+    //     return <Shimmer/>
+    // }
     return (
         <div className="body">
             <div className="search">
@@ -26,7 +21,8 @@ const Body = () => {
             </div>
             <div className="restaurant-container">
                 {
-                    restList.map(res => <RestaurantCard 
+                    restList.length === 0 ? <Shimmer/> :
+                        restList.map(res => <RestaurantCard 
                         cloudinaryImageId={res.data.cloudinaryImageId}
                         name = {res.data.name}
                         cuisines = {res.data.cuisines}  
