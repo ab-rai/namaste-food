@@ -24,7 +24,7 @@
 .restaurant-card{
   height: 350px;
   width: 250px;
-  background-color: rgb(95, 206, 184);
+  background-color: #BCD2E8;
   margin: 30px;
   padding: 10px;
   
@@ -48,4 +48,16 @@
   margin: 5px;
   padding: 5px;
   background-color: rgb(167, 199, 227);
+}
+.shimmer-container{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 50px;
+}
+.shimmer-card{
+  height: 350px;
+  width: 250px;
+  background-color: #BCD2E8;
+  margin: 30px;
+  padding: 10px;
 }
