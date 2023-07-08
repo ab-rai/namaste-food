@@ -22,12 +22,11 @@
   margin: 20px;
 }
 .restaurant-card{
-  height: 350px;
   width: 250px;
-  background-color: #BCD2E8;
+  background-color: #D5F3FE;
   margin: 30px;
   padding: 10px;
-  
+  border-radius: 0.6em;
 }
 .restaurant-card:hover{
   border: 1px solid brown;
@@ -56,8 +55,58 @@
 }
 .shimmer-card{
   height: 350px;
-  width: 250px;
-  background-color: #BCD2E8;
+  width: 230px;
+  background-color: #D5F3FE;
   margin: 30px;
   padding: 10px;
+  border-radius: 0.6em;
+}
+
+.filter-btn{
+  margin-right: 50px;
+  height: 30px;
+  background-color: #72A0C1;
+  border-radius: 0.5em;
+  border: rgb(46, 25, 29) solid 2px;
+  
+}
+.filter-btn:hover{
+  border: 2px solid brown;
+  cursor: pointer;
+}
+.login-button{
+  height: 2.2em;
+  width: 5.2em;
+  margin-top: 20px;
+  margin-left: 20px;
+  background-color: #72A0C1;
+  border-radius: 0.5em;
+}
+.login-button:hover{
+  border: 2px solid brown;
+  cursor: pointer;
+}
+.actions-container{
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.search-container{
+  margin-left: 20px;;
+}
+.search-button{
+  height: 2.2em;
+  width: 5.2em;
+  margin-left: 20px;
+  background-color: #72A0C1;
+  border-radius: 0.5em;
+}
+.search-button:hover{
+  border: 2px solid brown;
+  cursor: pointer;
+}
+.search-text{
+  height: 1.8em  ;
+  min-width: 24em;
+  border-radius: 0.5em;
 }

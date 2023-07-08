@@ -1,6 +1,8 @@
 // import namaste-food-logo from "./namaste-food-logo.png";
+import { useState } from "react";
 import "./../App.css"
 const Header = () => {
+    const [isLogin, setIsLogin] = useState(false);
     return (
         <div className="header">
             <div className="logo-container">
@@ -12,6 +14,9 @@ const Header = () => {
                     <li >About Us</li>
                     <li >Contanct Us</li>
                     <li >Cart</li>
+                    <button className="login-button" onClick={()=>{
+                        setIsLogin(!isLogin);
+                    }}>{isLogin ? 'logout' : 'login'}</button>
                 </ul>
             </div>
         </div>

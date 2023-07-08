@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 const Body = () => {
     const [restList,setRestList] = useState([]);
+    const [searchText, setSearchText] = useState('');
     useEffect(()=> {
         async function fetchData(){
             const data = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6105073&lng=77.1145653&page_type=DESKTOP_WEB_LISTING');
@@ -11,24 +12,37 @@ const Body = () => {
         }
         fetchData();
     } ,[]);
-    // if(restList.length === 0){
-    //     return <Shimmer/>
-    // }
-    return (
+    return   restList.length === 0 ? <Shimmer/> :
+    (
         <div className="body">
-            <div className="search">
-                <h2>Search</h2>
+            <div className="actions-container">
+                <div className="search-container">
+                    <input type="text" className="search-text" value={searchText} onChange={(e)=>{
+                        setSearchText(e.target.value);
+                    }}  />
+                    <button className="search-button" onClick={()=>{
+                        const filteredRestaurants = restList.filter(rest => 
+                            rest.data.name.toLowerCase().includes(searchText.toLowerCase())
+                        )
+                        setRestList(filteredRestaurants);
+                     }}>Search</button>
+                    
+                </div>
+                <button className="filter-btn" onClick={()=>{
+                    const filteredRestaurants = restList.filter(rest => rest.data.avgRating >=4.2);
+                    setRestList(filteredRestaurants);
+                }}> Top Rated Restaurants </button>
             </div>
             <div className="restaurant-container">
                 {
-                    restList.length === 0 ? <Shimmer/> :
-                        restList.map(res => <RestaurantCard 
-                        cloudinaryImageId={res.data.cloudinaryImageId}
-                        name = {res.data.name}
-                        cuisines = {res.data.cuisines}  
-                        rating = {res.data.avgRating}
-                        deliveryTime = {res.data.deliveryTime}  
-                        />)
+                    restList.map(res => <RestaurantCard 
+                    key = {res.data.id}
+                    cloudinaryImageId={res.data.cloudinaryImageId}
+                    name = {res.data.name}
+                    cuisines = {res.data.cuisines}  
+                    avgRating = {res.data.avgRating}
+                    deliveryTime = {res.data.deliveryTime}  
+                    />)
                 }
             </div>
         </div>
