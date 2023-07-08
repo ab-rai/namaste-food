@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 const Body = () => {
     const [restList,setRestList] = useState([]);
+    const [filteredRestList,setFilteredRestList] = useState([]);
     const [searchText, setSearchText] = useState('');
     useEffect(()=> {
         async function fetchData(){
             const data = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6105073&lng=77.1145653&page_type=DESKTOP_WEB_LISTING');
             const jsonData = await data.json();
             setRestList(jsonData?.data?.cards[2]?.data?.data?.cards);
+            setFilteredRestList(jsonData?.data?.cards[2]?.data?.data?.cards);
         }
         fetchData();
     } ,[]);
@@ -24,18 +26,18 @@ const Body = () => {
                         const filteredRestaurants = restList.filter(rest => 
                             rest.data.name.toLowerCase().includes(searchText.toLowerCase())
                         )
-                        setRestList(filteredRestaurants);
+                        setFilteredRestList(filteredRestaurants);
                      }}>Search</button>
                     
                 </div>
                 <button className="filter-btn" onClick={()=>{
                     const filteredRestaurants = restList.filter(rest => rest.data.avgRating >=4.2);
-                    setRestList(filteredRestaurants);
+                    setFilteredRestList(filteredRestaurants);
                 }}> Top Rated Restaurants </button>
             </div>
             <div className="restaurant-container">
                 {
-                    restList.map(res => <RestaurantCard 
+                    filteredRestList.map(res => <RestaurantCard 
                     key = {res.data.id}
                     cloudinaryImageId={res.data.cloudinaryImageId}
                     name = {res.data.name}
