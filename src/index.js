@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -8,6 +8,7 @@ import About from './Components/About';
 import Contact from './Components/Contact';
 import Error from './Components/Error';
 import Body from './Components/Body';
+import RestaurantMenu from './Components/RestaurantMenu';
 
 const reactRouter = createBrowserRouter([
   {
@@ -26,6 +27,11 @@ const reactRouter = createBrowserRouter([
         path:'/contact',
         element:<Contact/>,
       },
+      {
+        path:'/restaurant/:restId',
+        element:<RestaurantMenu/>,
+      },
+      
     ],
     errorElement:<Error/>
     

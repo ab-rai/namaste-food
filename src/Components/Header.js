@@ -1,5 +1,6 @@
 // import namaste-food-logo from "./namaste-food-logo.png";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./../App.css"
 const Header = () => {
     const [isLogin, setIsLogin] = useState(false);
@@ -10,9 +11,15 @@ const Header = () => {
             </div>
             <div className="nav-item">
                 <ul >
-                    <li >Home</li>
-                    <li >About Us</li>
-                    <li >Contanct Us</li>
+                    <li > 
+                        <Link to="/">Home</Link> 
+                    </li>
+                    <li > 
+                        <Link to="/about">About Us</Link> 
+                    </li>
+                    <li > 
+                        <Link to="/contact">Contact Us</Link> 
+                    </li>
                     <li >Cart</li>
                     <button className="login-button" onClick={()=>{
                         setIsLogin(!isLogin);

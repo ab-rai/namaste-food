@@ -110,3 +110,24 @@
   min-width: 24em;
   border-radius: 0.5em;
 }
+.restaurant-menu{
+  display: flex;
+  flex-direction: column;
+  margin: 5% 35%;
+  height: 30%;
+  width: 30%;
+  background-color: #D5F3FE;
+  border: 2px solid brown;
+}
+.restaurant-menu :hover{
+  
+  cursor: pointer;
+}
+.restaurant-details{
+  margin: 10px;
+}
+.restaurant-logo{
+  width: 98%;
+  padding: 5px;
+  border-radius: 2em;
+}
