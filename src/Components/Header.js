@@ -2,26 +2,34 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./../App.css"
+import useOnlineStatus from "../utils/useOnlineStatus";
 const Header = () => {
     const [isLogin, setIsLogin] = useState(false);
+    const onlineStatus = useOnlineStatus();
     return (
-        <div className="header">
-            <div className="logo-container">
+        <div className="flex justify-between border-solid-2px-black bg-pink-100 border border-solid border-black">
+            <div className="w-56">
                 <img className="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV3qdhx6GBRvPmw2KFlr4DYkTq67ix675MJpcPAD4I&s" alt="namaste-food-logo"/>
             </div>
-            <div className="nav-item">
-                <ul >
-                    <li > 
+            <div className="flex items-center">
+                <ul className="flex ">
+                    <li className="px-4">
+                        online status : {onlineStatus === false ? "🔴":"🟢"}
+                    </li>
+                    <li className="px-4"> 
                         <Link to="/">Home</Link> 
                     </li>
-                    <li > 
+                    <li className="px-4"> 
                         <Link to="/about">About Us</Link> 
                     </li>
-                    <li > 
-                        <Link to="/contact">Contact Us</Link> 
+                    <li className="px-4"> 
+                        <Link to="/grocery">Grocery</Link> 
                     </li>
-                    <li >Cart</li>
-                    <button className="login-button" onClick={()=>{
+                    <li className="px-4">Cart</li>
+                    <li>
+
+                    </li>
+                    <button className="px-4" onClick={()=>{
                         setIsLogin(!isLogin);
                     }}>{isLogin ? 'logout' : 'login'}</button>
                 </ul>

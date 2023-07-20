@@ -1,7 +1,10 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, {withPromotedLabel} from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
+
+const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 const Body = () => {
     const [restList,setRestList] = useState([]);
     const [filteredRestList,setFilteredRestList] = useState([]);
@@ -15,15 +18,18 @@ const Body = () => {
         }
         fetchData();
     } ,[]);
-    return   restList.length === 0 ? <Shimmer/> :
+    const onlineStatus = useOnlineStatus();
+    if (onlineStatus === false)
+        return <h2>You seems to be offline, check your internet connection</h2>;
+    return   restList && restList.length === 0 ? <Shimmer/> :
     (
         <div className="body">
-            <div className="actions-container">
-                <div className="search-container">
-                    <input type="text" className="search-text" value={searchText} onChange={(e)=>{
+            <div className="flex">
+                <div className="m-4 p-4">
+                    <input type="text" className="border border-solid border-black" value={searchText} onChange={(e)=>{
                         setSearchText(e.target.value);
                     }}  />
-                    <button className="search-button" onClick={()=>{
+                    <button className=" mx-4 px-4  bg-green-100 rounded-lg hover:border border-solid border-blue-900" onClick={()=>{
                         const filteredRestaurants = restList.filter(rest => 
                             rest.data.name.toLowerCase().includes(searchText.toLowerCase())
                         )
@@ -31,23 +37,35 @@ const Body = () => {
                      }}>Search</button>
                     
                 </div>
-                <button className="filter-btn" onClick={()=>{
-                    const filteredRestaurants = restList.filter(rest => rest.data.avgRating >=4.2);
-                    setFilteredRestList(filteredRestaurants);
-                }}> Top Rated Restaurants </button>
+                <div className="flex items-center">
+                    <button className="bg-gray-200 rounded-lg px-2 hover:border border-solid border-pink-900" onClick={()=>{
+                        const filteredRestaurants = restList.filter(rest => rest.data.avgRating >=4.2);
+                        setFilteredRestList(filteredRestaurants);
+                    }}> Top Rated Restaurants </button>
+                </div>
+                
             </div>
-            <div className="restaurant-container">
+            <div className="flex flex-wrap">
                 {
                     filteredRestList.map(res => 
                     <Link to={`/restaurant/${res.data.id}` } key = {res.data.id}
                         >
-                        <RestaurantCard 
-                        cloudinaryImageId={res.data.cloudinaryImageId}
-                        name = {res.data.name}
-                        cuisines = {res.data.cuisines}  
-                        avgRating = {res.data.avgRating}
-                        deliveryTime = {res.data.deliveryTime}  
-                        />
+                        {
+                            res.data.promoted ? 
+                            <RestaurantCardPromoted 
+                                cloudinaryImageId={res.data.cloudinaryImageId}
+                                name = {res.data.name}
+                                cuisines = {res.data.cuisines}  
+                                avgRating = {res.data.avgRating}
+                                deliveryTime = {res.data.deliveryTime} /> :
+                            <RestaurantCard 
+                                cloudinaryImageId={res.data.cloudinaryImageId}
+                                name = {res.data.name}
+                                cuisines = {res.data.cuisines}  
+                                avgRating = {res.data.avgRating}
+                                deliveryTime = {res.data.deliveryTime} />
+                        }
+                        
                     </Link>
                     )
                 }
