@@ -1,11 +1,13 @@
 // import namaste-food-logo from "./namaste-food-logo.png";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import "./../App.css"
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 const Header = () => {
     const [isLogin, setIsLogin] = useState(false);
     const onlineStatus = useOnlineStatus();
+    const {loggedInUser} = useContext(UserContext);
     return (
         <div className="flex justify-between border-solid-2px-black bg-pink-100 border border-solid border-black">
             <div className="w-56">
@@ -26,12 +28,12 @@ const Header = () => {
                         <Link to="/grocery">Grocery</Link> 
                     </li>
                     <li className="px-4">Cart</li>
-                    <li>
-
-                    </li>
                     <button className="px-4" onClick={()=>{
                         setIsLogin(!isLogin);
                     }}>{isLogin ? 'logout' : 'login'}</button>
+
+                     <li className="px-4 font-bold">{loggedInUser}</li>
+                    
                 </ul>
             </div>
         </div>
