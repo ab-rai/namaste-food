@@ -18,7 +18,7 @@ const RestaurantMenu = () => {
     category?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory")
     return (
         <div className="flex flex-col w-[60%] border border-red-500 border-solid bg-slate-100 mx-[20%] my-5 rounded-lg">
-            <img className="w-[99%] p-4"  src={restLogo} alt="rest logo"/>
+            <img className="w-[50%] text-center m-auto h-[2%] p-4"  src={restLogo} alt="rest logo"/>
             <div className="w-10/12  m-4 mx-auto">
                 <h2 className="font-bold">{name}</h2>
                 <h4>{cuisines ? cuisines.join(',  '): 'No cuisines'}</h4>

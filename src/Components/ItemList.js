@@ -1,5 +1,12 @@
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
+
 const ItemList = ({items}) =>{
     const URLIMAGE = "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/";
+    const dispatch = useDispatch();
+    const handleAddItem = (item)=>{
+        dispatch(addItem(item));
+    }
     return (
         <div>
             {
@@ -17,7 +24,8 @@ const ItemList = ({items}) =>{
                             </div>
                             <div className="w-3/12">
                                 <div className="absolute">
-                                <button className="p-1  bg-black text-white shadow-lg h-6 rounded-lg  text-sm m-1">Add +</button>
+                                <button className="p-1  bg-black text-white shadow-lg h-6 rounded-lg
+                                  text-sm m-1" onClick={()=>handleAddItem(item)}>Add +</button>
                                 </div>
                                 
                                 <img  src={`${URLIMAGE}${item.card.info.imageId}`} alt="item-logo"></img>
